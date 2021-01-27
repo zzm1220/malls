@@ -1,3 +1,10 @@
+<!--
+ * @Author: zhimin
+ * @Date: 2021-01-27 10:04:53
+ * @LastEditors: zhimin
+ * @LastEditTime: 2021-01-27 13:44:19
+ * @FilePath: \malls\src\App.vue
+-->
 <template>
   <div id="app">
     <router-view></router-view>
@@ -5,9 +12,10 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App'
+  name: 'App',
+  mounted () {
+  }
 }
 </script>
 
