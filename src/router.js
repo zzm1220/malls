@@ -1,3 +1,10 @@
+/*
+ * @Author: zhimin
+ * @Date: 2021-01-27 10:04:53
+ * @LastEditors: zhimin
+ * @LastEditTime: 2021-01-28 17:34:54
+ * @FilePath: \malls\src\router.js
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -7,6 +14,7 @@ const routes = [
   {
     path: "/",
     name: "Index",
+    redirect: "/home",
     component: () =>
       import(/* webpackChunkName: "Layout" */ "./pages/layout/Layout"),
     children: [
@@ -69,7 +77,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-    routes
+  routes
 })
 
 export default router

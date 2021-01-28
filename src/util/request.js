@@ -2,13 +2,12 @@
  * @Author: zhimin
  * @Date: 2021-01-27 14:03:30
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-27 15:39:09
+ * @LastEditTime: 2021-01-28 17:02:14
  * @FilePath: \malls\src\util\request.js
  */
 import axios from 'axios'
-import baseURL from '../../env'
 const instance = axios.create({
-    baseURL,
+    baseURL: '/api',
     timeout: 8000
 })
 // 接口返回统一处理
@@ -28,7 +27,8 @@ instance.interceptors.response.use(response => {
 export const get = (url, params = {}) => {
     return new Promise((resolve, reject) => {
         instance.get(url, { params }).then(response => {
-            resolve(response.data)
+            console.log(response)
+            resolve(response)
         }, err => {
             reject(err)
         })
