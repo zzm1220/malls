@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-28 17:34:19
+ * @LastEditTime: 2021-01-29 09:56:22
  * @FilePath: \malls\src\components\NavHeader.vue
 -->
 <!-- 组件说明 -->
@@ -17,9 +17,16 @@
           <li><a href="javascript:;">协议规则</a></li>
         </ul>
         <ul class="header__top__user">
-          <li><a href="javascript:;">登录</a></li>
-          <li><a href="javascript:;">注册</a></li>
-          <li class="cart">
+          <li v-if="username"><a href="javascript:;">{{username}}</a></li>
+          <li v-else><a
+              href="javascript:;"
+              @click="handleLogin"
+            >登录</a></li>
+          <li><a href="javascript:;">我的订单</a></li>
+          <li
+            class="cart"
+            @click="handleGoCart"
+          >
             <a href="javascript:;">
               <span class="iconfont">&#xe6af;</span>
               购物车
@@ -53,7 +60,7 @@
                   >
                 </div>
                 <h4 class="item__title">{{item.name}}</h4>
-                <p class="item__price">{{item.price}}元</p>
+                <p class="item__price">{{item.price|currency}}元</p>
               </a>
             </li>
           </ul>
@@ -162,6 +169,7 @@ export default {
   name: 'nav-header',
   data () {
     return {
+      username: 'zhimin',
       phoneList: [],
       tvList: []
     };
@@ -172,16 +180,26 @@ export default {
   computed: {
 
   },
+  filters: {
+    currency (val) {
+      if (!val) return '0.00'
+      return `￥${val.toFixed(2)}`
+    }
+  },
   methods: {
     getBarPhoneList () {
-      // console.log(get)
-      console.log("hello methods")
       get('/products', {
         categoryId: '100012',
         pageSize: 6
       }).then(res => {
         this.phoneList = res.list
       })
+    },
+    handleGoCart () {
+      this.$router.push('/order')
+    },
+    handleLogin () {
+      this.$router.push('/login')
     }
   }
 }
@@ -208,7 +226,7 @@ export default {
         }
       }
       &__user {
-        flex-basis: 184px;
+        flex-basis: 220px;
         height: 40px;
         @include flex();
         a {
