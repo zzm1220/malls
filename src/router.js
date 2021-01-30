@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-28 17:34:54
+ * @LastEditTime: 2021-01-30 17:03:45
  * @FilePath: \malls\src\router.js
  */
 import Vue from 'vue'
@@ -41,13 +41,14 @@ const routes = [
   {
     path: "/order",
     name: "Order",
+    redirect: "/orderHome",
     component: () =>
       import(
         /* webpackChunkName: "OrderLayout" */ "./pages/layout/OrderLayout"
       ),
     children: [
       {
-        path: "",
+        path: "/orderHome",
         name: "OrderHome",
         component: () =>
           import(/* webpackChunkName: "OrderHome" */ "./pages/order/Order"),
@@ -74,6 +75,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import(/* webpackChunkName: "Cart" */ "./pages/cart/Cart")
+  }
 ];
 
 const router = new VueRouter({
