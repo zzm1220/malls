@@ -42,7 +42,7 @@ export const post = (url, data = {}) => {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            resolve(response.data)
+            resolve(response)
         }, err => {
             reject(err)
         })

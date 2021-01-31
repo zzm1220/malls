@@ -2,8 +2,8 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-30 16:54:12
- * @FilePath: \malls\src\pages\home\Home.vue
+ * @LastEditTime: 2021-01-31 22:40:16
+ * @FilePath: /malls/src/pages/home/Home.vue
 -->
 <!-- 组件说明 -->
 <template>
@@ -119,7 +119,7 @@
         <a :href="`/#/product/${item.id}`">
           <img
             class="ads__item__img"
-            :src="item.img"
+            v-lazy="item.img"
             alt="ads"
           >
         </a>
@@ -132,7 +132,7 @@
       >
         <img
           class="banner__link__img"
-          src="/imgs/banner-1.png"
+          v-lazy="'/imgs/banner-1.png'"
           alt="banner"
         >
       </a>
@@ -144,7 +144,7 @@
           <div class="products__content__banner">
             <a href="/#/product/35">
               <img
-                src="/imgs/mix-alpha.jpg"
+                v-lazy="'/imgs/mix-alpha.jpg'"
                 alt="product"
               >
             </a>
@@ -159,7 +159,7 @@
                 <div class="list__item__tile">{{item.status?"新品":"秒杀"}}</div>
                 <img
                   class="list__item__img"
-                  :src="item.mainImage"
+                  v-lazy="item.mainImage"
                   :alt="item.name"
                 >
                 <h4 class="list__item__title">{{item.name}}</h4>
@@ -167,7 +167,7 @@
               </a>
               <p
                 class="list__item__price"
-                @click="handleGoCart"
+                @click="addCart(item.id)"
               >
                 {{item.price|currency}}
                 <span class="iconfont">&#xe6af;</span>
@@ -177,18 +177,35 @@
         </div>
       </div>
     </div>
+    <modal 
+      title="提示" 
+      sureText="查看购物车" 
+      btnType="1"
+      modalType="middle"
+      :showModal="showModal"
+      @sureClick="goToCart"
+      @closeClick="handleCloseClick"
+      >
+      <template v-slot:body>
+        <div>
+          商品添加成功！
+        </div>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import Modal from '../../components/Modal'
 import 'swiper/css/swiper.min.css'
-import { get } from '../../util/request'
+import { get,post } from '../../util/request'
 export default {
   name: 'Home',
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    Modal
   },
   data () {
     return {
@@ -365,7 +382,8 @@ export default {
           img: '/imgs/ads/ads-4.jpg'
         }
       ],
-      phoneList: []
+      phoneList: [],
+      showModal: false
     };
   },
   mounted () {
@@ -390,8 +408,19 @@ export default {
       })
 
     },
-    handleGoCart () {
+    addCart (productId) {
+      post('/carts',{
+        productId,
+        selected: true
+      }).then(()=> { 
+        this.showModal = true
+      })
+    },
+    goToCart() {
       this.$router.push('/cart')
+    },
+    handleCloseClick() {
+      this.showModal = false
     }
   },
 }
