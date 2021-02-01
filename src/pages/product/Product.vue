@@ -1,15 +1,29 @@
 <!-- 组件说明 -->
 <template>
     <div class="product">
-        this is product
+        <ProductNav :height="12">
+            <template v-slot:navBtn>
+                <a href="javascript:;" class="btn">立即购买</a>
+            </template>
+        </ProductNav>
+        <div class="test">1111111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
+        <div class="test">111</div>
     </div>
 </template>
 
 <script>
-    //import x from ''
+    import ProductNav from '../../components/ProductNav'
     export default {
         components: {
-
+            ProductNav
         },
         data () {
             return {
@@ -25,6 +39,8 @@
     }
 </script>
 
-<style scoped lang="sass">
-
+<style scoped lang="scss">
+.test {
+    height: 220px;
+}
 </style>
