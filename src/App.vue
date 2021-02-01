@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-27 13:44:19
+ * @LastEditTime: 2021-02-01 17:20:55
  * @FilePath: \malls\src\App.vue
 -->
 <template>
@@ -12,13 +12,33 @@
 </template>
 
 <script>
+import { get } from './util/request'
 export default {
   name: 'App',
   mounted () {
+    this.getUser()
+    this.getCartCount()
+  },
+  methods: {
+    getUser () {
+      get('/user').then(res => {
+        this.$store.dispatch('saveUsername', {
+          username: res.username
+        })
+      })
+    },
+    getCartCount () {
+      get('/carts/products/sum').then(res => {
+        console.log(res)
+        this.$store.dispatch('saveCartCount', {
+          cartCount: res
+        })
+      })
+    }
   }
 }
 </script>
 
 <style>
-@import "./assets/scss/reset.scss"
+@import './assets/scss/reset.scss';
 </style>

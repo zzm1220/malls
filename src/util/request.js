@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 14:03:30
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-28 17:02:14
+ * @LastEditTime: 2021-02-01 15:23:40
  * @FilePath: \malls\src\util\request.js
  */
 import axios from 'axios'
@@ -13,10 +13,13 @@ const instance = axios.create({
 // 接口返回统一处理
 instance.interceptors.response.use(response => {
     const res = response.data
+    const path = location.hash
     if (res.status === 0) {
         return res.data
     } else if (res.status === 10) {
-        window.location.href = "/#login"
+        if (path !== '#/home') {
+            window.location.href = "/#login"
+        }
     } else {
         alert(res.msg)
     }

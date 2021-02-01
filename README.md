@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-27 16:12:39
+ * @LastEditTime: 2021-02-01 15:34:27
  * @FilePath: \malls\README.md
 -->
 # malls
@@ -45,3 +45,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1. 本地创建json
 2. mock数据平台
 3. 集成Mock Api
+### vuex

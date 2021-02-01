@@ -2,20 +2,25 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-27 14:04:14
+ * @LastEditTime: 2021-02-01 16:46:07
  * @FilePath: \malls\src\main.js
  */
 import Vue from 'vue'
 import VueLazyLoad from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false
-Vue.use(VueLazyLoad,{
+Vue.config.devtools = true
+Vue.use(VueLazyLoad, {
   loading: '/imgs/loading-svg/loading-bars.svg'
 });
+Vue.use(VueCookie)
 
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')

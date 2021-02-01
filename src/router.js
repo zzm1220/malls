@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-30 17:03:45
+ * @LastEditTime: 2021-02-01 09:46:55
  * @FilePath: \malls\src\router.js
  */
 import Vue from 'vue'
@@ -79,6 +79,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: () => import(/* webpackChunkName: "Cart" */ "./pages/cart/Cart")
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName:"Login" */ "./pages/login/Login")
   }
 ];
 

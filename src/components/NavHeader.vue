@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-29 09:56:22
+ * @LastEditTime: 2021-02-01 17:09:54
  * @FilePath: \malls\src\components\NavHeader.vue
 -->
 <!-- 组件说明 -->
@@ -30,7 +30,7 @@
             <a href="javascript:;">
               <span class="iconfont">&#xe6af;</span>
               购物车
-              <span class="num">(0)</span>
+              <span class="num">({{cartCount}})</span>
             </a>
           </li>
         </ul>
@@ -169,7 +169,6 @@ export default {
   name: 'nav-header',
   data () {
     return {
-      username: 'zhimin',
       phoneList: [],
       tvList: []
     };
@@ -178,7 +177,12 @@ export default {
     this.getBarPhoneList()
   },
   computed: {
-
+    username () {
+      return this.$store.state.username
+    },
+    cartCount () {
+      return this.$store.state.cartCount
+    }
   },
   filters: {
     currency (val) {
