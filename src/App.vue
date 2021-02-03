@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-02-01 17:20:55
+ * @LastEditTime: 2021-02-03 15:50:19
  * @FilePath: \malls\src\App.vue
 -->
 <template>
@@ -21,14 +21,14 @@ export default {
   },
   methods: {
     getUser () {
-      get('/user').then(res => {
+      get('/user').then((res = {}) => {
         this.$store.dispatch('saveUsername', {
           username: res.username
         })
       })
     },
     getCartCount () {
-      get('/carts/products/sum').then(res => {
+      get('/carts/products/sum').then((res = 0) => {
         console.log(res)
         this.$store.dispatch('saveCartCount', {
           cartCount: res

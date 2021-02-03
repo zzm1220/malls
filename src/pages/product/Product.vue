@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-02-03 15:19:23
+ * @LastEditTime: 2021-02-03 16:34:02
  * @FilePath: \malls\src\pages\product\Product.vue
 -->
 <!-- 组件说明 -->
@@ -13,6 +13,7 @@
         <a
           href="javascript:;"
           class="btn"
+          @click="buy"
         >立即购买</a>
       </template>
     </ProductNav>
@@ -101,6 +102,7 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.min.css'
 import ProductNav from '../../components/ProductNav'
+import { get } from '../../util/request'
 export default {
   components: {
     ProductNav,
@@ -110,8 +112,9 @@ export default {
   data () {
     return {
       showSlide: false,
+      product: null,
       swiperOption: {
-        // autoplay: true,
+        autoplay: true,
         loop: true,
         centeredSlides: true,
         centeredSlidesBounds: true,
@@ -151,8 +154,20 @@ export default {
 
   },
   methods: {
-
+    getProduct () {
+      const id = this.$route.params.id
+      get(`/products/${id}`).then(res => {
+        this.product = res;
+      })
+    },
+    buy () {
+      const id = this.$route.params.id
+      this.$router.push(`/detail/${id}`)
+    }
   },
+  mounted () {
+    this.getProduct()
+  }
 }
 </script>
 
@@ -315,6 +330,7 @@ export default {
           border-radius: 50%;
           color: #ffffff;
           z-index: 499;
+          cursor: pointer;
         }
       }
     }
