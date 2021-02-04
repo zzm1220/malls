@@ -2,8 +2,8 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-01-31 22:40:16
- * @FilePath: /malls/src/pages/home/Home.vue
+ * @LastEditTime: 2021-02-04 16:41:26
+ * @FilePath: \malls\src\pages\home\Home.vue
 -->
 <!-- 组件说明 -->
 <template>
@@ -177,15 +177,15 @@
         </div>
       </div>
     </div>
-    <modal 
-      title="提示" 
-      sureText="查看购物车" 
+    <modal
+      title="提示"
+      sureText="查看购物车"
       btnType="1"
       modalType="middle"
       :showModal="showModal"
       @sureClick="goToCart"
       @closeClick="handleCloseClick"
-      >
+    >
       <template v-slot:body>
         <div>
           商品添加成功！
@@ -199,7 +199,7 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import Modal from '../../components/Modal'
 import 'swiper/css/swiper.min.css'
-import { get,post } from '../../util/request'
+import { get, post } from '../../util/request'
 export default {
   name: 'Home',
   components: {
@@ -409,17 +409,20 @@ export default {
 
     },
     addCart (productId) {
-      post('/carts',{
+      post('/carts', {
         productId,
         selected: true
-      }).then(()=> { 
+      }).then((res = {}) => {
+        this.$store.dispatch('saveCartCount', {
+          cartCount: res.cartTotalQuantity
+        })
         this.showModal = true
       })
     },
-    goToCart() {
+    goToCart () {
       this.$router.push('/cart')
     },
-    handleCloseClick() {
+    handleCloseClick () {
       this.showModal = false
     }
   },

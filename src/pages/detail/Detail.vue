@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-02-03 17:09:42
+ * @LastEditTime: 2021-02-04 16:27:32
  * @FilePath: \malls\src\pages\detail\Detail.vue
 -->
 <!-- 组件说明 -->
@@ -13,24 +13,36 @@
       <div class="container">
         <div class="swiper">
           <swiper :options="swiperOption">
-            <swiper-slide v-for="(item, index) in swiperList" :key="index">
+            <swiper-slide
+              v-for="(item, index) in swiperList"
+              :key="index"
+            >
               <img :src="item.img" />
             </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
+            <div
+              class="swiper-pagination"
+              slot="pagination"
+            ></div>
             <!-- 导航按钮 -->
-            <div class="swiper-button-prev" slot="button-prev"></div>
-            <div class="swiper-button-next" slot="button-next"></div>
+            <div
+              class="swiper-button-prev"
+              slot="button-prev"
+            ></div>
+            <div
+              class="swiper-button-next"
+              slot="button-next"
+            ></div>
           </swiper>
         </div>
         <div class="content">
-          <h2 class="content__title">小米8</h2>
+          <h2 class="content__title">{{product.name}}</h2>
           <p class="content__desc">
             相机全新升级 / 960帧超慢动作 / 手持超级夜景 / 全球首款双频GPS /
             骁龙845处理器 / 红 外人脸解锁 / AI变焦双摄 / 三星 AMOLED 屏
           </p>
           <h4 class="content__delivery">小米自营</h4>
           <div class="content__price">
-            <span class="currentPrice">2599元</span>
+            <span class="currentPrice">{{product.price}}元</span>
             <span class="oldPrice">2999元</span>
           </div>
           <div class="content__address">
@@ -43,8 +55,16 @@
           </div>
           <h5 class="select__version">选择版本</h5>
           <div class="versions">
-            <span class="version selected">6GB+64GB 全网通</span>
-            <span class="version">4GB+64GB 移动4G</span>
+            <span
+              class="version"
+              :class="{'selected':version===1}"
+              @click="version=1"
+            >6GB+64GB 全网通</span>
+            <span
+              class="version"
+              :class="{'selected':version===2}"
+              @click="version=2"
+            >4GB+64GB 移动4G</span>
           </div>
           <h5 class="select__colors">选择颜色</h5>
           <div class="colors">
@@ -52,14 +72,16 @@
           </div>
           <div class="content__detail">
             <p class="detail__msg">
-              <span class="detail__msg__name"
-                >小米8 6GB+64GB 全网通 深灰色</span
-              >
+              <span class="detail__msg__name">小米8 {{version===1?"6GB+64GB 全网通":"4GB+64GB 移动4G"}} 深灰色</span>
               <span class="detail__msg__price">1099元</span>
             </p>
-            <p class="total">总计：1099元</p>
+            <p class="total">总计：{{product.price}}元</p>
           </div>
-            <a href="javascript:;" class="btn btn-huge">加入购物车</a>
+          <a
+            href="javascript:;"
+            class="btn btn-huge"
+            @click="handleAddCart"
+          >加入购物车</a>
         </div>
       </div>
     </div>
@@ -69,6 +91,7 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.min.css";
+import { get, post } from "../../util/request";
 import ProductNav from "../../components/ProductNav";
 export default {
   components: {
@@ -76,7 +99,7 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  data() {
+  data () {
     return {
       swiperOption: {
         // autoplay: true,
@@ -104,16 +127,39 @@ export default {
           img: "/imgs/detail/phone-4.jpg",
         },
       ],
+      id: this.$route.params.id,
+      product: {},
+      version: 1
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    getProductInfo () {
+      get(`/products/${this.id}`).then(res => {
+        this.product = res
+      })
+    },
+    handleAddCart () {
+      post('/carts', {
+        productId: this.id,
+        selected: true
+      }).then(res => {
+        this.$store.dispatch('saveCartCount', {
+          cartCount: res.cartTotalQuantity
+        })
+        this.$router.push('/cart')
+      })
+    }
+  },
+  mounted () {
+    this.getProductInfo()
+  }
 };
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/iconfont.scss";
-@import "../../assets/scss/base.scss";
+@import '../../assets/scss/iconfont.scss';
+@import '../../assets/scss/base.scss';
 .wrapper {
   width: 100%;
   height: 870px;

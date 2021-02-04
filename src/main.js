@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-02-01 16:46:07
+ * @LastEditTime: 2021-02-04 16:19:41
  * @FilePath: \malls\src\main.js
  */
 import Vue from 'vue'

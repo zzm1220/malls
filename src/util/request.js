@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 14:03:30
  * @LastEditors: zhimin
- * @LastEditTime: 2021-02-01 15:23:40
+ * @LastEditTime: 2021-02-04 16:38:11
  * @FilePath: \malls\src\util\request.js
  */
 import axios from 'axios'
@@ -20,8 +20,10 @@ instance.interceptors.response.use(response => {
         if (path !== '#/home') {
             window.location.href = "/#login"
         }
+        return Promise.reject(res)
     } else {
         alert(res.msg)
+        return Promise.reject(res)
     }
 }, error => {
     alert(error)
