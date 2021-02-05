@@ -2,7 +2,7 @@
  * @Author: zhimin
  * @Date: 2021-01-27 10:04:53
  * @LastEditors: zhimin
- * @LastEditTime: 2021-02-04 17:27:06
+ * @LastEditTime: 2021-02-05 11:11:53
  * @FilePath: \malls\src\pages\cart\Cart.vue
 -->
 <!-- 组件说明 -->
@@ -20,7 +20,11 @@
         <div class="wrapper">
           <h3 class="header">
             <span class="inputBox">
-              <input type="checkbox" id="selectAll" class="selectAll" />
+              <input
+                type="checkbox"
+                id="selectAll"
+                class="selectAll"
+              />
               <label for="selectAll">全选</label>
             </span>
             <span class="name">商品名称</span>
@@ -30,14 +34,28 @@
             <span class="operate">操作</span>
           </h3>
           <div class="item">
-            <span class="">
-              <input type="checkbox" id="selectAll" class="selectAll" />
+            <span class="col-1">
+              <input
+                type="checkbox"
+                id="selectAll"
+                class="selectAll"
+              />
             </span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <span class="col-3">
+              <img
+                src=""
+                alt=""
+              >
+              <span>小米8 6GB 全息幻彩紫 64GB</span>
+            </span>
+            <span class="col-1">1999元</span>
+            <span class="col-2">
+              <a href="javascript:;">-</a>
+              <span>11</span>
+              <a href="javscript:;">+</a>
+            </span>
+            <span class="col-1">1999元</span>
+            <span class="col-1 iconfont">&#xe6ac;</span>
           </div>
         </div>
       </div>
@@ -51,7 +69,7 @@ export default {
   components: {
     OrderHeader,
   },
-  data() {
+  data () {
     return {};
   },
   computed: {},
@@ -60,7 +78,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/base.scss";
+@import '../../assets/scss/iconfont.scss';
+@import '../../assets/scss/base.scss';
 .cart {
   &__content {
     box-sizing: border-box;
@@ -88,7 +107,7 @@ export default {
               margin-right: 16px;
               font-size: 14px;
               &::after {
-                content: "";
+                content: '';
                 display: inline-block;
                 position: absolute;
                 top: 0;
@@ -98,7 +117,7 @@ export default {
                 background: #ff6600;
               }
               &:checked::after {
-                content: "✓";
+                content: '✓';
                 color: #ffffff;
                 font-size: 12px;
                 font-weight: bold;
@@ -124,6 +143,26 @@ export default {
           }
           .operate {
             flex-basis: 160px;
+            text-align: center;
+          }
+        }
+        .item {
+          box-sizing: border-box;
+          width: 100%;
+          height: 50px;
+          display: flex;
+          padding: 22px 0;
+          border-bottom: 1px solid #e5e5e5;
+          .col-1 {
+            flex: 1;
+            text-align: center;
+          }
+          .col-2 {
+            flex: 2;
+            text-align: center;
+          }
+          .col-3 {
+            flex: 3;
             text-align: center;
           }
         }
