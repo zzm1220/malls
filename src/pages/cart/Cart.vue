@@ -73,7 +73,7 @@
               </span>
             </span>
             <span class="col-1">{{ item.productTotalPrice }}元</span>
-            <span class="col-1 iconfont del">&#xe6ac;</span>
+            <span class="col-1 iconfont del" @click="delProduct(item)">&#xe6ac;</span>
           </div>
         </div>
         <div class="footer">
@@ -94,6 +94,7 @@
             <a
               href="javascript:;"
               class="btn btn-large"
+              @click="order"
             >
               去结算
             </a>
@@ -135,6 +136,7 @@ export default {
     delProduct (item) {
       del(`/carts/${item.productId}`).then(res => {
         console.log(res)
+        this.renderCart(res)
       })
     },
     updateCart (item, type) {
@@ -167,6 +169,14 @@ export default {
       this.allChecked = res.selectedAll
       this.cartTotalPrice = res.cartTotalPrice
       this.checkedNum = res.cartTotalQuantity
+    },
+    order() {
+      const isUnChecked = this.list.every(item=>!item.productSelected)
+      if (isUnChecked) {
+        alert("请选择一件商品再下单！")
+      } else {
+        this.$router.push('/order/confirm')
+      }
     }
   },
   mounted () {
