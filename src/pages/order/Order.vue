@@ -1,30 +1,24 @@
 <!-- 组件说明 -->
 <template>
-    <div class="">
-        this id order page
-    </div>
+  <div class="">
+    orderpage
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'order',
-        components: {
 
-        },
-        data () {
-            return {
-
-            };
-        },
-        computed: {
-
-        },
-        methods: {
-
-        },
-    }
+export default {
+  name: "order",
+  components: {
+   
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {},
+};
 </script>
 
 <style scoped lang="sass">
-
 </style>

@@ -35,12 +35,12 @@
             >{{ cancelText }}</a
           >
           <div class="btn-group" v-if="btnType == 3">
-            <a href="javascript:;" class="btn" @click="handleSureClick">确定</a>
+            <a href="javascript:;" class="btn" @click="handleSureClick">{{sureText}}</a>
             <a
               href="javascript:;"
               class="btn btn-default"
               @click="handleCancelClick"
-              >取消</a
+              >{{ cancelText }}</a
             >
           </div>
         </div>
@@ -146,7 +146,7 @@ export default {
     }
     &__body {
       box-sizing: border-box;
-      padding: 42px 42px 42px 54px;
+      padding: 42px 40px 54px 40px;
       background: #ffffff;
       font-size: 14px;
     }

@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import VueLazyLoad from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
+import { Message } from 'element-ui' 
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -18,6 +19,8 @@ Vue.use(VueLazyLoad, {
   loading: '/imgs/loading-svg/loading-bars.svg'
 });
 Vue.use(VueCookie)
+
+Vue.prototype.$message = Message
 
 new Vue({
   store,

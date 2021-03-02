@@ -144,13 +144,13 @@ export default {
         selected = item.productSelected
       if (type == 'minus') {
         if (quantity === 1) {
-          alert("商品至少保留一件！")
+          this.$message("商品至少保留一件！")
           return
         }
         quantity--
       } else if (type == 'plus') {
         if (quantity > item.productStock) {
-          alert("超出库存！")
+          this.$message("超出库存！")
           return
         }
         quantity++
@@ -173,7 +173,7 @@ export default {
     order() {
       const isUnChecked = this.list.every(item=>!item.productSelected)
       if (isUnChecked) {
-        alert("请选择一件商品再下单！")
+        this.$message("请选择一件商品再下单！")
       } else {
         this.$router.push('/order/confirm')
       }
