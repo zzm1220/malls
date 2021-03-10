@@ -66,6 +66,12 @@ const routes = [
           import(/* webpackChunkName: "OrderPay" */ "./pages/order/OrderPay"),
       },
       {
+        path: "alipay",
+        name: "AliPay",
+        component: () => 
+          import(/* webpackChunkName: "AliPay" */ "./pages/payment/alipay"),
+      },
+      {
         path: "confirm",
         name: "OrderConfirm",
         component: () =>
